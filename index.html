@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Play Button</title>
+    <title>Audio Player</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="preload"
@@ -132,8 +132,8 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       // url-decode title and subtitle
-      const title = decodeURIComponent(urlParams.get("title"));
-      const subtitle = decodeURIComponent(urlParams.get("subtitle"));
+      const title = applyHackForCarrdCo(decodeURIComponent(urlParams.get("title")));
+      const subtitle = applyHackForCarrdCo(decodeURIComponent(urlParams.get("subtitle")));
 
       document.querySelector(".title").innerHTML = title;
       document.querySelector(".subtitle").innerHTML = subtitle;
@@ -150,6 +150,14 @@
           pauseIcon.style.display = "none";
           playIcon.style.display = "block";
         }
+      }
+
+      function applyHackForCarrdCo(text) {
+        // this is a hack for carrd.co websites to make
+        // it possible to encode html tags in the IFRAME urls
+
+        // replace !lt! with < and !gt! with >
+        return text.replace(/!lt!/g, "<").replace(/!gt!/g, ">");
       }
 
       audioElement.addEventListener("ended", function () {
