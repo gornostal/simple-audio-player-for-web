@@ -1,4 +1,4 @@
-# Simple iframe-friendly audio player for web
+# Simple iframe-friendly audio player for Web
 
 Check out the demo on [article2audio.app](https://article2audio.app/).
 
